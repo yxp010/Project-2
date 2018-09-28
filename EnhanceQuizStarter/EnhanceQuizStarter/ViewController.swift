@@ -64,6 +64,8 @@ class ViewController: UIViewController {
             option4Button.isEnabled = false
             AudioServicesPlaySystemSound(wrongAnswerSound)
             gameTimer.invalidate()
+            questionsAsked += 1
+            indexOfSelectedQuestion += 1
             loadNextRound(delay: 2)
 
         } else {
@@ -144,15 +146,12 @@ class ViewController: UIViewController {
     
     func nextRound() {
         secondsOnTimer = 15
-        questionsAsked += 1
         if questionsAsked == questionsPerRound {
             // Game is over
             
             displayScore()
         } else {
             // Continue game
-
-            indexOfSelectedQuestion += 1
             option1Button.isEnabled = true
             option2Button.isEnabled = true
             option3Button.isEnabled = true
@@ -199,6 +198,8 @@ class ViewController: UIViewController {
         option3Button.isEnabled = false
         option4Button.isEnabled = false
         gameTimer.invalidate()
+        questionsAsked += 1
+        indexOfSelectedQuestion += 1
         loadNextRound(delay: 2)
     }
     
