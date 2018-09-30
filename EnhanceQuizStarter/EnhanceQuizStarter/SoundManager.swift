@@ -10,21 +10,17 @@ import Foundation
 import AudioToolbox
 
 class SoundManager {
-    let sounds: AllSounds
+    let gameStartSound = gameStart.sound
+    let corrctAnswerSound = correctAnswer.sound
+    let wrongAnswerSound = wrongAnswer.sound
     
-    
-    init(sound: AllSounds) {
-        self.sounds = sound
-    }
-    func playStartGameSound() {
-        AudioServicesPlaySystemSound(sounds.gameStartSound)
-    }
-    func playCorrectAnswerSound() {
-        AudioServicesPlaySystemSound(sounds.corrctAnswerSound)
-    }
     func playWrongAnswerSound() {
-        AudioServicesPlaySystemSound(sounds.wrongAnswerSound)
+        AudioServicesPlayAlertSound(wrongAnswerSound)
     }
-    
-
+    func playCorrctAnswerSound() {
+        AudioServicesPlaySystemSound(corrctAnswerSound)
+    }
+    func playGameStartsound() {
+        AudioServicesPlaySystemSound(gameStartSound)
+    }
 }

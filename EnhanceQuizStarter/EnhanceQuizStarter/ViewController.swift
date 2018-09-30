@@ -18,10 +18,10 @@ class ViewController: UIViewController {
     
     
     var secondsOnTimer = 15
-    let soundManager = SoundManager(sound: soundEffects)
+    let soundManager = SoundManager()
     var gameTimer: Timer!
-    let quizManager = QuizManager(quiz: quiz)
-    var buttons = [UIButton]()
+    let quizManager = QuizManager(quiz: allQuestions)
+    
     
     // MARK: - Outlets
     
@@ -33,128 +33,85 @@ class ViewController: UIViewController {
     @IBOutlet weak var playAgainButton: UIButton!
     @IBOutlet weak var option3Button: UIButton!
     @IBOutlet weak var option4Button: UIButton!
+
+    @IBOutlet weak var constraintBetweenButtonOneAndTwo: NSLayoutConstraint!
+    @IBOutlet weak var constraintBetweenButtonTwoAndThree: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        createOptionButtonsArray()
-        quizManager.startGame()
-        soundManager.playStartGameSound()
+        quizManager.createOptionButtonsArray(button1: option1Button, button2: option2Button, button3: option3Button, button4: option4Button)
+        changeButtonsShape()
+        quizManager.loadNewGameData()
+        soundManager.playGameStartsound()
         displayQuestion()
         
 
     }
     
-    // MARK: - Helpers
-    
-    // Make an Array for all option buttons.
-    func createOptionButtonsArray() {
-        buttons.append(option1Button)
-        buttons.append(option2Button)
-        buttons.append(option3Button)
-        buttons.append(option4Button)
-    }
-    
-    // Make a countDonw function for timer use.
-    // If the time runs out, the game goes to next round.
-    @objc
-    func countDown() {
-        secondsOnTimer -= 1
-        timer.text = String(secondsOnTimer)
-        if secondsOnTimer <= 0 {
-            for button in buttons {
-                button.isEnabled = false
-            }
-            soundManager.playStartGameSound()
-            gameTimer.invalidate()
-            quizManager.questionsAsked += 1
-            quizManager.indexOfCurrentQuestion += 1
-            loadNextRound(delay: 2)
-            
-        } else {
-            timer.text = String(secondsOnTimer)
+    func changeButtonsShape() {
+        for button in quizManager.buttons {
+            button.layer.cornerRadius = 11
         }
-        
+        playAgainButton.layer.cornerRadius = 11
     }
     
+    
+    //Display function for the game each round.
     func displayQuestion() {
+        //Select and display current round question.
+        let currentQuestionIndex = quizManager.indexOfCurrentQuestion
+        let currentRoundQuestion = quizManager.questionsArray[currentQuestionIndex]
+        quizManager.createOptionsArray(question: currentRoundQuestion)
+        let optionsArray = quizManager.options
+        questionField.text = currentRoundQuestion.question
         
         secondsOnTimer = 15
+        timer.text = String(secondsOnTimer)
         playAgainButton.isHidden = true
         timer.isEnabled = true
         showCorrectAnswerField.isHidden = true
         
         //Start the Timer.
-        timer.text = String(secondsOnTimer)
         gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
         
-        //Select and display current round question.
-        let currentQuestionIndex = quizManager.indexOfCurrentQuestion
-        let currentRoundQuestion = quizManager.questionsArray[currentQuestionIndex]
-        questionField.text = currentRoundQuestion.question
+        
         
         //Create a random options Index to get the options from the currentRoundQuestion.option for each option button. It makes that the options showing on the buttons are placed in different positions each time.
-        
-        quizManager.createOptionsArray(question: currentRoundQuestion)
-        let optionsArray = quizManager.options
-       
-        for (index, button) in buttons.enumerated() {
-            button.setTitle(optionsArray[index], for: UIControlState.normal)
+        if optionsArray.count == 3 {
+            changeToThreeOptionLayOut()
+            var buttonIndex = 0
+            for button in quizManager.buttons {
+                if buttonIndex == 3 {
+                    break
+                }
+                button.setTitle(optionsArray[buttonIndex], for: UIControlState.normal)
+                buttonIndex += 1
+            }
+        } else {
+            returnToOriginalLayout()
+            for (index, button) in quizManager.buttons.enumerated() {
+                button.setTitle(optionsArray[index], for: UIControlState.normal)
+            }
         }
         
         let optionBackgroundColor = UIColor(displayP3Red: 171/255.0, green: 89/255.0, blue: 90/255.0, alpha: 1.0)
         
-        for button in buttons {
+        for button in quizManager.buttons {
             button.backgroundColor = optionBackgroundColor
-        }
-        
-    }
-    
-    func nextRound() {
-        secondsOnTimer = 15
-        if quizManager.questionsAsked == quizManager.questionsPerRound {
-            // Game is over
-            
-            quizManager.displayScore(timerField: timer, playAgainButton: playAgainButton, questionField: questionField)
-        } else {
-            // Continue game
-            for button in buttons {
-                button.isEnabled = true
-            }
-            displayQuestion()
-        }
-    }
-    
-    func loadNextRound(delay seconds: Int) {
-        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-        // Calculates a time value to execute the method given current time and delay
-        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
-        
-        // Executes the nextRound method at the dispatch time on the main queue
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            self.nextRound()
         }
     }
     
     // MARK: - Actions
     
-    @IBAction func checkAnswer(_ sender: UIButton) {
-        // Increment the questions asked counter
-        
-        quizManager.checkAnswer(sender, options: buttons, showCorrectAnswerField: showCorrectAnswerField, timer: gameTimer)
-
+    @IBAction func chooseAnAnswer(_ sender: UIButton) {
+        quizManager.checkAnswer(sender: sender, showCorrectAnswerField: showCorrectAnswerField, timer: gameTimer)
         loadNextRound(delay: 2)
     }
     
-    
-    
     @IBAction func playAgain(_ sender: UIButton) {
         timer.isHidden = false
-        quizManager.startGame()
+        quizManager.loadNewGameData()
         nextRound()
     }
-    
 
 }
-

@@ -15,11 +15,9 @@ struct Question {
         self.question = question
         self.options = options
         self.correctAnswer = correctAnswer
-        
     }
 
 }
-
 let question1 = Question(question: "When the first qualifying game for 2018 World Cup took place?", options: ["10 March 2015", "12 March 2015", "14 April 2015", "19 May 2015"], correctAnswer: "12 March 2015")
 let question2 = Question(question: "How many teams has been qualified for Fifa World Cup 2018?", options: ["22", "32", "42", "40"], correctAnswer: "32")
 let question3 = Question(question: "There are how many host cities of Fifa World Cup 2018?", options: ["10", "11", "12", "13"], correctAnswer: "11")
@@ -31,3 +29,11 @@ let question8 = Question(question: "What are the two countries first ever appear
 let question9 = Question(question: "What is the host team of FIFA World Cup 2018?", options: ["Spain", "Germany", "Russia", "Portugal"], correctAnswer: "Russia")
 let question10 = Question(question: "Which two teams will play the opening match in 2018 FIFA World Cup?", options: ["Poland and Russia", "Russia and Saudi Arabia", "Russia and Egypt", "Russia and Uruguay"], correctAnswer: "Russia and Saudi Arabia")
 let question11 = Question(question: "In which city the Luzhniki Stadium is located?", options: ["Leningrad", "Saint Petersberg", "Moscow", "Volgograd"], correctAnswer: "Moscow")
+let question12 = Question(question: "What is the venue of Fifa World cup 2018 final championship?", options: ["Luzhniki Stadium", "Krestovsky Stadium", "Kaliningrad Stadium"], correctAnswer: "Luzhniki Stadium")
+let question13 = Question(question: "What are the two countries first ever appearing in FIFA World Cup 2018?", options: ["Morocco and Peru", "Panama and Iceland", "Serbia and Poland"], correctAnswer: "Panama and Iceland")
+let question14 = Question(question: "What is the host team of FIFA World Cup 2018?", options: ["Spain", "Russia", "Portugal"], correctAnswer: "Russia")
+let question15 = Question(question: "Which two teams will play the opening match in 2018 FIFA World Cup?", options: ["Poland and Russia", "Russia and Saudi Arabia", "Russia and Egypt"], correctAnswer: "Russia and Saudi Arabia")
+let question16 = Question(question: "In which city the Luzhniki Stadium is located?", options: ["Leningrad", "Saint Petersberg", "Moscow"], correctAnswer: "Moscow")
+let allQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11,question12, question13, question14, question15, question16]
+let sampleQuestions = [question12, question13, question14, question15, question16]
+

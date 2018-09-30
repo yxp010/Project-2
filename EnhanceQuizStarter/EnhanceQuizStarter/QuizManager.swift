@@ -20,11 +20,20 @@ class QuizManager {
     var questionsAsked = 0
     var options = [String]()
     var indexOfCurrentQuestion = 0
-    let soundManager = SoundManager(sound: soundEffects)
+    let soundManager = SoundManager()
     var secondsOnTimer = 15
+    var buttons = [UIButton]()
     init(quiz: [Question]) {
         self.quiz = quiz
         
+    }
+    
+    // Make an Array for all option buttons array.
+    func createOptionButtonsArray(button1: UIButton, button2: UIButton, button3: UIButton, button4: UIButton) {
+        buttons.append(button1)
+        buttons.append(button2)
+        buttons.append(button3)
+        buttons.append(button4)
     }
     
     func questionsGenerator() {
@@ -34,7 +43,7 @@ class QuizManager {
             questionsArray.append(quiz[questionIndexProvider.nextInt()])
         }
     }
-    func startGame() {
+    func loadNewGameData() {
         correctQuestions = 0
         questionsAsked = 0
         questionsArray = [Question]()
@@ -61,12 +70,12 @@ class QuizManager {
         questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
     }
     
-    func checkAnswer(_ sender: UIButton, options: [UIButton], showCorrectAnswerField: UILabel!, timer: Timer!) {
+    func checkAnswer(sender: UIButton, showCorrectAnswerField: UILabel!, timer: Timer!) {
         let selectedQuestionDict = questionsArray[indexOfCurrentQuestion]
         let correctAnswer = selectedQuestionDict.correctAnswer
         if sender.currentTitle == correctAnswer {
             sender.backgroundColor = UIColor.black
-            soundManager.playCorrectAnswerSound()
+            soundManager.playCorrctAnswerSound()
             correctQuestions += 1
             showCorrectAnswerField.isHidden = false
             showCorrectAnswerField.text = "Good Job, you got it!"
@@ -75,11 +84,11 @@ class QuizManager {
             sender.backgroundColor = UIColor.cyan
             soundManager.playWrongAnswerSound()
             showCorrectAnswerField.isHidden = false
-            showCorrectAnswerField.text = "CORRECT ANSWER: \(correctAnswer)"
+            showCorrectAnswerField.text = "Not that one!!"
         }
         
-        for option in options {
-            option.isEnabled = false
+        for button in buttons {
+            button.isEnabled = false
         }
         
         timer.invalidate()
