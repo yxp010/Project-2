@@ -11,6 +11,10 @@
 		351FE0FF214FED140075C8F7 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351FE0FE214FED140075C8F7 /* Questions.swift */; };
 		351FE101215154220075C8F7 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351FE100215154220075C8F7 /* Quiz.swift */; };
 		351FE1032151582C0075C8F7 /* QuizManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351FE1022151582C0075C8F7 /* QuizManager.swift */; };
+		35FEFBA2215FAA2300A209E1 /* SoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA1215FAA2300A209E1 /* SoundEffect.swift */; };
+		35FEFBA4215FAE0700A209E1 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA3215FAE0700A209E1 /* SoundManager.swift */; };
+		35FEFBA6215FAF6E00A209E1 /* AllSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA5215FAF6E00A209E1 /* AllSounds.swift */; };
+		35FEFBAA215FB5D700A209E1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA9215FB5D700A209E1 /* Timer.swift */; };
 		972A72B12056F06C0059EF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972A72B02056F06C0059EF4A /* AppDelegate.swift */; };
 		972A72B32056F06C0059EF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972A72B22056F06C0059EF4A /* ViewController.swift */; };
 		972A72B62056F06C0059EF4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 972A72B42056F06C0059EF4A /* Main.storyboard */; };
@@ -23,6 +27,10 @@
 		351FE0FE214FED140075C8F7 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 		351FE100215154220075C8F7 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		351FE1022151582C0075C8F7 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManager.swift; sourceTree = "<group>"; };
+		35FEFBA1215FAA2300A209E1 /* SoundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
+		35FEFBA3215FAE0700A209E1 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		35FEFBA5215FAF6E00A209E1 /* AllSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSounds.swift; sourceTree = "<group>"; };
+		35FEFBA9215FB5D700A209E1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		972A72AD2056F06C0059EF4A /* EnhanceQuizStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnhanceQuizStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		972A72B02056F06C0059EF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		972A72B22056F06C0059EF4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +80,10 @@
 				351FE0FE214FED140075C8F7 /* Questions.swift */,
 				351FE100215154220075C8F7 /* Quiz.swift */,
 				351FE1022151582C0075C8F7 /* QuizManager.swift */,
+				35FEFBA1215FAA2300A209E1 /* SoundEffect.swift */,
+				35FEFBA3215FAE0700A209E1 /* SoundManager.swift */,
+				35FEFBA5215FAF6E00A209E1 /* AllSounds.swift */,
+				35FEFBA9215FB5D700A209E1 /* Timer.swift */,
 			);
 			path = EnhanceQuizStarter;
 			sourceTree = "<group>";
@@ -151,9 +163,13 @@
 			files = (
 				351FE0FF214FED140075C8F7 /* Questions.swift in Sources */,
 				972A72B32056F06C0059EF4A /* ViewController.swift in Sources */,
+				35FEFBA2215FAA2300A209E1 /* SoundEffect.swift in Sources */,
 				351FE1032151582C0075C8F7 /* QuizManager.swift in Sources */,
 				351FE101215154220075C8F7 /* Quiz.swift in Sources */,
+				35FEFBA4215FAE0700A209E1 /* SoundManager.swift in Sources */,
+				35FEFBAA215FB5D700A209E1 /* Timer.swift in Sources */,
 				972A72B12056F06C0059EF4A /* AppDelegate.swift in Sources */,
+				35FEFBA6215FAF6E00A209E1 /* AllSounds.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

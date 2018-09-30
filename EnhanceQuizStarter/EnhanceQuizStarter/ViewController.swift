@@ -14,22 +14,15 @@ import WatchKit
 class ViewController: UIViewController {
     
     // MARK: - Properties
+
     
-    let questionsPerRound = 4
-    var questionsAsked = 0
-    var correctQuestions = 0
-    var indexOfSelectedQuestion = 0
-    let option1Index = 0
-    let option2Index = 1
-    let option3Index = 2
-    let option4Index = 3
-    var currentQuestionIndex = 0
+    
     var secondsOnTimer = 15
-    var questionArray = [Question]()
-    var gameSound: SystemSoundID = 0
-    var wrongAnswerSound: SystemSoundID = 0
-    var correctAnswerSound: SystemSoundID = 0
+    let soundManager = SoundManager(sound: soundEffects)
     var gameTimer: Timer!
+    let quizManager = QuizManager(quiz: quiz)
+    var buttons = [UIButton]()
+    
     // MARK: - Outlets
     
     @IBOutlet weak var timer: UILabel!
@@ -44,118 +37,90 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadGameStartSound()
-        loadCheckAnswerSound()
-        playGameStartSound()
-        questionsIndexesGenerator()
+        createOptionButtonsArray()
+        quizManager.startGame()
+        soundManager.playStartGameSound()
         displayQuestion()
-
-    }
-    
-    @objc
-    func countDown() {
-        timer.text = String(secondsOnTimer)
-        secondsOnTimer -= 1
         
-        if secondsOnTimer <= 0 {
-            option1Button.isEnabled = false
-            option2Button.isEnabled = false
-            option3Button.isEnabled = false
-            option4Button.isEnabled = false
-            AudioServicesPlaySystemSound(wrongAnswerSound)
-            gameTimer.invalidate()
-            questionsAsked += 1
-            indexOfSelectedQuestion += 1
-            loadNextRound(delay: 2)
-
-        } else {
-            timer.text = String(secondsOnTimer)
-        }
 
     }
     
     // MARK: - Helpers
-    func questionsIndexesGenerator() {
-        let questionIndexProvider = GKShuffledDistribution.init(lowestValue: 0, highestValue: quiz.count - 1)
-        for _ in 0..<questionsPerRound {
-            questionArray.append(quiz[questionIndexProvider.nextInt()])
+    
+    // Make an Array for all option buttons.
+    func createOptionButtonsArray() {
+        buttons.append(option1Button)
+        buttons.append(option2Button)
+        buttons.append(option3Button)
+        buttons.append(option4Button)
+    }
+    
+    // Make a countDonw function for timer use.
+    // If the time runs out, the game goes to next round.
+    @objc
+    func countDown() {
+        secondsOnTimer -= 1
+        timer.text = String(secondsOnTimer)
+        if secondsOnTimer <= 0 {
+            for button in buttons {
+                button.isEnabled = false
+            }
+            soundManager.playStartGameSound()
+            gameTimer.invalidate()
+            quizManager.questionsAsked += 1
+            quizManager.indexOfCurrentQuestion += 1
+            loadNextRound(delay: 2)
+            
+        } else {
+            timer.text = String(secondsOnTimer)
         }
-    }
-    
-    func loadGameStartSound() {
-        let path = Bundle.main.path(forResource: "GameSound", ofType: "wav", inDirectory: "soundEffect")
-        let soundUrl = URL(fileURLWithPath: path!)
-        AudioServicesCreateSystemSoundID(soundUrl as CFURL, &gameSound)
-    }
-    func loadCheckAnswerSound() {
-        let pathOfWrongAnswerSound = Bundle.main.path(forResource: "wrongAnswerSound", ofType: "mp3", inDirectory: "soundEffect")
-        let pathOfCorrectAnswerSound = Bundle.main.path(forResource: "correctAnswerSound", ofType: "wav", inDirectory: "soundEffect")
-        let soundUrlOfWrongAnswerSound = URL(fileURLWithPath: pathOfWrongAnswerSound!)
-        let soundUrlOfCorrectAnswerSound = URL(fileURLWithPath: pathOfCorrectAnswerSound!)
-        AudioServicesCreateSystemSoundID(soundUrlOfWrongAnswerSound as CFURL, &wrongAnswerSound)
-        AudioServicesCreateSystemSoundID(soundUrlOfCorrectAnswerSound as CFURL, &correctAnswerSound)
-        
         
     }
-    
-    func playGameStartSound() {
-        AudioServicesPlaySystemSound(gameSound)
-    }
-    
-    
     
     func displayQuestion() {
         
         secondsOnTimer = 15
+        playAgainButton.isHidden = true
         timer.isEnabled = true
+        showCorrectAnswerField.isHidden = true
+        
+        //Start the Timer.
         timer.text = String(secondsOnTimer)
         gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
         
-        showCorrectAnswerField.isHidden = true
-        let questionDictionary = questionArray[indexOfSelectedQuestion]
-        questionField.text = questionDictionary.question
-        playAgainButton.isHidden = true
-        let optionsArray = questionDictionary.options
-        let optionIndexesGenerator = GKShuffledDistribution.init(lowestValue: 0, highestValue: optionsArray.count - 1)
-        var optionIndexes = [Int]()
-        for _ in 0..<optionsArray.count {
-            optionIndexes.append(optionIndexesGenerator.nextInt())
+        //Select and display current round question.
+        let currentQuestionIndex = quizManager.indexOfCurrentQuestion
+        let currentRoundQuestion = quizManager.questionsArray[currentQuestionIndex]
+        questionField.text = currentRoundQuestion.question
+        
+        //Create a random options Index to get the options from the currentRoundQuestion.option for each option button. It makes that the options showing on the buttons are placed in different positions each time.
+        
+        quizManager.createOptionsArray(question: currentRoundQuestion)
+        let optionsArray = quizManager.options
+       
+        for (index, button) in buttons.enumerated() {
+            button.setTitle(optionsArray[index], for: UIControlState.normal)
         }
-        option1Button.setTitle(optionsArray[optionIndexes[option1Index]], for: UIControlState.normal)
-        option2Button.setTitle(optionsArray[optionIndexes[option2Index]], for: UIControlState.normal)
-        option3Button.setTitle(optionsArray[optionIndexes[option3Index]], for: UIControlState.normal)
-        option4Button.setTitle(optionsArray[optionIndexes[option4Index]], for: UIControlState.normal)
+        
         let optionBackgroundColor = UIColor(displayP3Red: 171/255.0, green: 89/255.0, blue: 90/255.0, alpha: 1.0)
-        option1Button.backgroundColor = optionBackgroundColor
-        option2Button.backgroundColor = optionBackgroundColor
-        option3Button.backgroundColor = optionBackgroundColor
-        option4Button.backgroundColor = optionBackgroundColor
         
+        for button in buttons {
+            button.backgroundColor = optionBackgroundColor
+        }
         
-    }
-    
-    func displayScore() {
-        // Hide the answer buttons
-        
-        // Display play again button
-        timer.isHidden = true
-        playAgainButton.isHidden = false
-        
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
     }
     
     func nextRound() {
         secondsOnTimer = 15
-        if questionsAsked == questionsPerRound {
+        if quizManager.questionsAsked == quizManager.questionsPerRound {
             // Game is over
             
-            displayScore()
+            quizManager.displayScore(timerField: timer, playAgainButton: playAgainButton, questionField: questionField)
         } else {
             // Continue game
-            option1Button.isEnabled = true
-            option2Button.isEnabled = true
-            option3Button.isEnabled = true
-            option4Button.isEnabled = true
+            for button in buttons {
+                button.isEnabled = true
+            }
             displayQuestion()
         }
     }
@@ -177,29 +142,8 @@ class ViewController: UIViewController {
     @IBAction func checkAnswer(_ sender: UIButton) {
         // Increment the questions asked counter
         
-        let selectedQuestionDict = questionArray[indexOfSelectedQuestion]
-        let correctAnswer = selectedQuestionDict.correctAnswer
-        if sender.currentTitle == correctAnswer {
-            sender.backgroundColor = UIColor.black
-            AudioServicesPlayAlertSound(correctAnswerSound)
-            correctQuestions += 1
-            showCorrectAnswerField.isHidden = false
-            showCorrectAnswerField.text = "Good Job, you got it!"
-            
-        } else {
-            sender.backgroundColor = UIColor.cyan
-            AudioServicesPlayAlertSound(wrongAnswerSound)
-            showCorrectAnswerField.isHidden = false
-            showCorrectAnswerField.text = "CORRECT ANSWER: \(correctAnswer)"
-        }
-        
-        option1Button.isEnabled = false
-        option2Button.isEnabled = false
-        option3Button.isEnabled = false
-        option4Button.isEnabled = false
-        gameTimer.invalidate()
-        questionsAsked += 1
-        indexOfSelectedQuestion += 1
+        quizManager.checkAnswer(sender, options: buttons, showCorrectAnswerField: showCorrectAnswerField, timer: gameTimer)
+
         loadNextRound(delay: 2)
     }
     
@@ -207,11 +151,7 @@ class ViewController: UIViewController {
     
     @IBAction func playAgain(_ sender: UIButton) {
         timer.isHidden = false
-        questionsAsked = 0
-        correctQuestions = 0
-        indexOfSelectedQuestion = 0
-        questionArray = [Question]()
-        questionsIndexesGenerator()
+        quizManager.startGame()
         nextRound()
     }
     
