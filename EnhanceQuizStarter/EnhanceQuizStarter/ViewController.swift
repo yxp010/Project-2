@@ -16,15 +16,21 @@ class ViewController: UIViewController {
     // MARK: - Properties
 
     
-    
+    let initialTimePerQuestion = 15
     var secondsOnTimer = 15
     let soundManager = SoundManager()
     var gameTimer: Timer!
     let quizManager = QuizManager(quiz: allQuestions)
-    
+    let nextQuestionButtonTitle = "Next Question"
+    let playAgainButtonTitle = "Play Again"
+    var optionsArray = [String]()
+    var currentRoundQuestion: Question = question1
+    let buttonHight = 50
+
     
     // MARK: - Outlets
     
+    @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var timer: UILabel!
     @IBOutlet weak var showCorrectAnswerField: UILabel!
     @IBOutlet weak var questionField: UILabel!
@@ -34,6 +40,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var option3Button: UIButton!
     @IBOutlet weak var option4Button: UIButton!
 
+    @IBOutlet weak var checkMarkTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var checkMarkBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var constraintBetweenButtonOneAndTwo: NSLayoutConstraint!
     @IBOutlet weak var constraintBetweenButtonTwoAndThree: NSLayoutConstraint!
     
@@ -43,7 +51,7 @@ class ViewController: UIViewController {
         changeButtonsShape()
         quizManager.loadNewGameData()
         soundManager.playGameStartsound()
-        displayQuestion()
+        nextQuestion()
         
 
     }
@@ -55,63 +63,70 @@ class ViewController: UIViewController {
         playAgainButton.layer.cornerRadius = 11
     }
     
-    
     //Display function for the game each round.
     func displayQuestion() {
         //Select and display current round question.
-        let currentQuestionIndex = quizManager.indexOfCurrentQuestion
-        let currentRoundQuestion = quizManager.questionsArray[currentQuestionIndex]
-        quizManager.createOptionsArray(question: currentRoundQuestion)
-        let optionsArray = quizManager.options
-        questionField.text = currentRoundQuestion.question
         
-        secondsOnTimer = 15
+        //
+        checkMark.isHidden = true
         timer.text = String(secondsOnTimer)
         playAgainButton.isHidden = true
-        timer.isEnabled = true
+        timer.isHidden = false
         showCorrectAnswerField.isHidden = true
         
         //Start the Timer.
         gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
         
         
-        
-        //Create a random options Index to get the options from the currentRoundQuestion.option for each option button. It makes that the options showing on the buttons are placed in different positions each time.
-        if optionsArray.count == 3 {
-            changeToThreeOptionLayOut()
-            var buttonIndex = 0
-            for button in quizManager.buttons {
-                if buttonIndex == 3 {
-                    break
-                }
-                button.setTitle(optionsArray[buttonIndex], for: UIControlState.normal)
-                buttonIndex += 1
-            }
-        } else {
-            returnToOriginalLayout()
-            for (index, button) in quizManager.buttons.enumerated() {
-                button.setTitle(optionsArray[index], for: UIControlState.normal)
-            }
+        for button in quizManager.buttons {
+            button.isEnabled = true
         }
+        //Create a random options Index to get the options from the currentRoundQuestion.option for each option button. It makes that the options showing on the buttons are placed in different positions each time.
+        
         
         let optionBackgroundColor = UIColor(displayP3Red: 171/255.0, green: 89/255.0, blue: 90/255.0, alpha: 1.0)
         
         for button in quizManager.buttons {
             button.backgroundColor = optionBackgroundColor
         }
+        if quizManager.questionsAsked == quizManager.questionsPerRound - 1 {
+            playAgainButton.setTitle(playAgainButtonTitle, for: UIControlState.normal)
+        } else {
+            playAgainButton.setTitle(nextQuestionButtonTitle, for: UIControlState.normal)
+        }
+    }
+    func displayScore() {
+        // Hide the answer buttons
+        
+        // Display play again button
+        gameTimer.invalidate()
+        timer.isHidden = true
+        
+        
+        questionField.text = "Way to go!\nYou got \(quizManager.correctQuestions) out of \(quizManager.questionsPerRound) correct!"
+
     }
     
     // MARK: - Actions
     
     @IBAction func chooseAnAnswer(_ sender: UIButton) {
-        quizManager.checkAnswer(sender: sender, showCorrectAnswerField: showCorrectAnswerField, timer: gameTimer)
-        loadNextRound(delay: 2)
+        secondsOnTimer = initialTimePerQuestion
+        changeCheckMarkPosition()
+        checkMark.isHidden = false
+        quizManager.checkAnswer(sender: sender, showCorrectAnswerField: showCorrectAnswerField, timer: gameTimer, playAgainButton: playAgainButton)
+        if quizManager.questionsAsked == quizManager.questionsPerRound {
+            displayScore()
+        }
     }
     
-    @IBAction func playAgain(_ sender: UIButton) {
-        timer.isHidden = false
-        quizManager.loadNewGameData()
-        nextRound()
+    @IBAction func playAgain() {
+        if playAgainButton.currentTitle == nextQuestionButtonTitle {
+            
+            nextQuestion()
+        } else {
+            
+            nextRound()
+        }
     }
 
 }

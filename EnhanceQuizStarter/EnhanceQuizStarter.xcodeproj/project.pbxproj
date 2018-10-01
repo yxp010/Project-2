@@ -10,11 +10,11 @@
 		351F405A215D2834007D5D4C /* soundEffect in Resources */ = {isa = PBXBuildFile; fileRef = 351F4059215D2833007D5D4C /* soundEffect */; };
 		351FE0FF214FED140075C8F7 /* AllQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351FE0FE214FED140075C8F7 /* AllQuestions.swift */; };
 		351FE1032151582C0075C8F7 /* QuizManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351FE1022151582C0075C8F7 /* QuizManager.swift */; };
-		355B5AE4216169E2003560BE /* FunctionsToChangeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B5AE3216169E2003560BE /* FunctionsToChangeLayout.swift */; };
-		35C8B27321612B2000823FD5 /* ExtForGameTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8B27221612B2000823FD5 /* ExtForGameTransition.swift */; };
+		355B5AE4216169E2003560BE /* ChangeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B5AE3216169E2003560BE /* ChangeLayout.swift */; };
+		35C8B27321612B2000823FD5 /* GameTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8B27221612B2000823FD5 /* GameTransition.swift */; };
 		35FEFBA2215FAA2300A209E1 /* SoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA1215FAA2300A209E1 /* SoundGenerator.swift */; };
 		35FEFBA4215FAE0700A209E1 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA3215FAE0700A209E1 /* SoundManager.swift */; };
-		35FEFBAA215FB5D700A209E1 /* ExtForTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA9215FB5D700A209E1 /* ExtForTimer.swift */; };
+		35FEFBAA215FB5D700A209E1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FEFBA9215FB5D700A209E1 /* Timer.swift */; };
 		972A72B12056F06C0059EF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972A72B02056F06C0059EF4A /* AppDelegate.swift */; };
 		972A72B32056F06C0059EF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972A72B22056F06C0059EF4A /* ViewController.swift */; };
 		972A72B62056F06C0059EF4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 972A72B42056F06C0059EF4A /* Main.storyboard */; };
@@ -26,11 +26,11 @@
 		351F4059215D2833007D5D4C /* soundEffect */ = {isa = PBXFileReference; lastKnownFileType = folder; path = soundEffect; sourceTree = "<group>"; };
 		351FE0FE214FED140075C8F7 /* AllQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuestions.swift; sourceTree = "<group>"; };
 		351FE1022151582C0075C8F7 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManager.swift; sourceTree = "<group>"; };
-		355B5AE3216169E2003560BE /* FunctionsToChangeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsToChangeLayout.swift; sourceTree = "<group>"; };
-		35C8B27221612B2000823FD5 /* ExtForGameTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtForGameTransition.swift; sourceTree = "<group>"; };
+		355B5AE3216169E2003560BE /* ChangeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLayout.swift; sourceTree = "<group>"; };
+		35C8B27221612B2000823FD5 /* GameTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTransition.swift; sourceTree = "<group>"; };
 		35FEFBA1215FAA2300A209E1 /* SoundGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundGenerator.swift; sourceTree = "<group>"; };
 		35FEFBA3215FAE0700A209E1 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		35FEFBA9215FB5D700A209E1 /* ExtForTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtForTimer.swift; sourceTree = "<group>"; };
+		35FEFBA9215FB5D700A209E1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		972A72AD2056F06C0059EF4A /* EnhanceQuizStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnhanceQuizStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		972A72B02056F06C0059EF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		972A72B22056F06C0059EF4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,19 +71,19 @@
 			isa = PBXGroup;
 			children = (
 				972A72B02056F06C0059EF4A /* AppDelegate.swift */,
-				972A72B42056F06C0059EF4A /* Main.storyboard */,
 				972A72B72056F06C0059EF4A /* Assets.xcassets */,
 				351F4059215D2833007D5D4C /* soundEffect */,
 				972A72B92056F06C0059EF4A /* LaunchScreen.storyboard */,
 				972A72BC2056F06C0059EF4A /* Info.plist */,
+				972A72B42056F06C0059EF4A /* Main.storyboard */,
 				972A72B22056F06C0059EF4A /* ViewController.swift */,
 				351FE0FE214FED140075C8F7 /* AllQuestions.swift */,
 				351FE1022151582C0075C8F7 /* QuizManager.swift */,
 				35FEFBA1215FAA2300A209E1 /* SoundGenerator.swift */,
 				35FEFBA3215FAE0700A209E1 /* SoundManager.swift */,
-				35FEFBA9215FB5D700A209E1 /* ExtForTimer.swift */,
-				35C8B27221612B2000823FD5 /* ExtForGameTransition.swift */,
-				355B5AE3216169E2003560BE /* FunctionsToChangeLayout.swift */,
+				35FEFBA9215FB5D700A209E1 /* Timer.swift */,
+				35C8B27221612B2000823FD5 /* GameTransition.swift */,
+				355B5AE3216169E2003560BE /* ChangeLayout.swift */,
 			);
 			path = EnhanceQuizStarter;
 			sourceTree = "<group>";
@@ -166,9 +166,9 @@
 				35FEFBA2215FAA2300A209E1 /* SoundGenerator.swift in Sources */,
 				351FE1032151582C0075C8F7 /* QuizManager.swift in Sources */,
 				35FEFBA4215FAE0700A209E1 /* SoundManager.swift in Sources */,
-				35FEFBAA215FB5D700A209E1 /* ExtForTimer.swift in Sources */,
-				355B5AE4216169E2003560BE /* FunctionsToChangeLayout.swift in Sources */,
-				35C8B27321612B2000823FD5 /* ExtForGameTransition.swift in Sources */,
+				35FEFBAA215FB5D700A209E1 /* Timer.swift in Sources */,
+				355B5AE4216169E2003560BE /* ChangeLayout.swift in Sources */,
+				35C8B27321612B2000823FD5 /* GameTransition.swift in Sources */,
 				972A72B12056F06C0059EF4A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +226,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: kevin20130209@hotmail.com (ZXMF5MDJ8R)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -285,7 +285,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: kevin20130209@hotmail.com (ZXMF5MDJ8R)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -310,12 +310,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R9E84DX62H;
+				DEVELOPMENT_TEAM = CVXNTKN2S6;
 				INFOPLIST_FILE = EnhanceQuizStarter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.EnhanceQuizStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.EnhanceQuizStarter123123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -325,12 +327,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R9E84DX62H;
+				DEVELOPMENT_TEAM = CVXNTKN2S6;
 				INFOPLIST_FILE = EnhanceQuizStarter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.EnhanceQuizStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.EnhanceQuizStarter123123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

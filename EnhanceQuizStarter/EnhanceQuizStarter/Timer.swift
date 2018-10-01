@@ -21,12 +21,15 @@ extension ViewController {
             gameTimer.invalidate()
             quizManager.questionsAsked += 1
             quizManager.indexOfCurrentQuestion += 1
-            loadNextRound(delay: 2)
-            
+            playAgainButton.isHidden = false
+            if quizManager.questionsAsked == quizManager.questionsPerRound {
+                displayScore()
+            }
+            showCorrectAnswerField.isHidden = false
+            showCorrectAnswerField.text = "Time Out!"
         } else {
             timer.text = String(secondsOnTimer)
         }
-        
     }
 }
 

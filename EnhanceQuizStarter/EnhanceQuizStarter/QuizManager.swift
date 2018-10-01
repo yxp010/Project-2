@@ -23,6 +23,7 @@ class QuizManager {
     let soundManager = SoundManager()
     var secondsOnTimer = 15
     var buttons = [UIButton]()
+    var nextQuestion: String = "next question"
     init(quiz: [Question]) {
         self.quiz = quiz
         
@@ -50,27 +51,17 @@ class QuizManager {
         indexOfCurrentQuestion = 0
         questionsGenerator()
     }
-    
-    func createOptionsArray(question: Question) {
-        
+    func createNextQuestion() {
+        let nextQuestionDict = questionsArray[indexOfCurrentQuestion]
+        nextQuestion = nextQuestionDict.question
         options = [String]()
-        let optionIndexesGenerator = GKShuffledDistribution.init(lowestValue: 0, highestValue: question.options.count - 1)
-        for _ in 0..<question.options.count {
-                options.append(question.options[(optionIndexesGenerator.nextInt())])
-            }
-            
+        let optionIndexesGenerator = GKShuffledDistribution.init(lowestValue: 0, highestValue: nextQuestionDict.options.count - 1)
+        for _ in 0..<nextQuestionDict.options.count {
+            options.append(nextQuestionDict.options[(optionIndexesGenerator.nextInt())])
         }
-    func displayScore(timerField: UILabel, playAgainButton: UIButton, questionField: UILabel) {
-        // Hide the answer buttons
-        
-        // Display play again button
-        timerField.isHidden = true
-        playAgainButton.isHidden = false
-        
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
     }
     
-    func checkAnswer(sender: UIButton, showCorrectAnswerField: UILabel!, timer: Timer!) {
+    func checkAnswer(sender: UIButton, showCorrectAnswerField: UILabel!, timer: Timer!, playAgainButton: UIButton) {
         let selectedQuestionDict = questionsArray[indexOfCurrentQuestion]
         let correctAnswer = selectedQuestionDict.correctAnswer
         if sender.currentTitle == correctAnswer {
@@ -92,11 +83,12 @@ class QuizManager {
         }
         
         timer.invalidate()
+        playAgainButton.isHidden = false
         questionsAsked += 1
         indexOfCurrentQuestion += 1
     }
         
-    }
+}
     
 
 
