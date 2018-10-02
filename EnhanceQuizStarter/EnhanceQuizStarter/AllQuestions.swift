@@ -6,7 +6,11 @@
 //  Copyright © 2018 Treehouse. All rights reserved.
 //
 
+// A Struct that builds questions.
 struct Question {
+    
+    // Properties:
+    
     let question: String
     let options: [String]
     let correctAnswer: String
@@ -18,6 +22,9 @@ struct Question {
     }
 
 }
+
+// All Question objects:
+
 let question1 = Question(question: "When the first qualifying game for 2018 World Cup took place?", options: ["10 March 2015", "12 March 2015", "14 April 2015", "19 May 2015"], correctAnswer: "12 March 2015")
 let question2 = Question(question: "How many teams has been qualified for Fifa World Cup 2018?", options: ["22", "32", "42", "40"], correctAnswer: "32")
 let question3 = Question(question: "There are how many host cities of Fifa World Cup 2018?", options: ["10", "11", "12", "13"], correctAnswer: "11")
@@ -34,6 +41,7 @@ let question13 = Question(question: "What are the two countries first ever appea
 let question14 = Question(question: "What is the host team of FIFA World Cup 2018?", options: ["Spain", "Russia", "Portugal"], correctAnswer: "Russia")
 let question15 = Question(question: "Which two teams will play the opening match in 2018 FIFA World Cup?", options: ["Poland and Russia", "Russia and Saudi Arabia", "Russia and Egypt"], correctAnswer: "Russia and Saudi Arabia")
 let question16 = Question(question: "In which city the Luzhniki Stadium is located?", options: ["Leningrad", "Saint Petersberg", "Moscow"], correctAnswer: "Moscow")
+
+// An array for all Question objects.
 let allQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11,question12, question13, question14, question15, question16]
-let sampleQuestions = [question12, question13, question14, question15, question16]
 

@@ -8,8 +8,7 @@
 
 import Foundation
 import AudioToolbox
-
-
+// A strut that for easily building sound objects.
 struct GameSound {
     let path: String?
     let soundUrl: URL
@@ -20,6 +19,7 @@ struct GameSound {
         soundUrl = URL(fileURLWithPath: self.path!)
         AudioServicesCreateSystemSoundID(soundUrl as CFURL, &sound)
     }
+
 }
 let gameStart = GameSound(Resource: "GameSound", Type: "wav", directory: "soundEffect")
 let correctAnswer = GameSound(Resource: "correctAnswerSound", Type: "wav", directory: "soundEffect")

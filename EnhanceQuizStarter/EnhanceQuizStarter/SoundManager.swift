@@ -9,10 +9,14 @@
 import Foundation
 import AudioToolbox
 
-class SoundManager {
+// A struct that have different 'sounds: SystemSoundID' as properties.
+// It also have functions play different sound base on the name.
+
+struct SoundManager {
     let gameStartSound = gameStart.sound
     let corrctAnswerSound = correctAnswer.sound
     let wrongAnswerSound = wrongAnswer.sound
+    
     
     func playWrongAnswerSound() {
         AudioServicesPlayAlertSound(wrongAnswerSound)
