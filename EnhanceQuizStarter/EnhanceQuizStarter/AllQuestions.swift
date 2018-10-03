@@ -36,12 +36,12 @@ let question8 = Question(question: "What are the two countries first ever appear
 let question9 = Question(question: "What is the host team of FIFA World Cup 2018?", options: ["Spain", "Germany", "Russia", "Portugal"], correctAnswer: "Russia")
 let question10 = Question(question: "Which two teams will play the opening match in 2018 FIFA World Cup?", options: ["Poland and Russia", "Russia and Saudi Arabia", "Russia and Egypt", "Russia and Uruguay"], correctAnswer: "Russia and Saudi Arabia")
 let question11 = Question(question: "In which city the Luzhniki Stadium is located?", options: ["Leningrad", "Saint Petersberg", "Moscow", "Volgograd"], correctAnswer: "Moscow")
-let question12 = Question(question: "What is the venue of Fifa World cup 2018 final championship?", options: ["Luzhniki Stadium", "Krestovsky Stadium", "Kaliningrad Stadium"], correctAnswer: "Luzhniki Stadium")
-let question13 = Question(question: "What are the two countries first ever appearing in FIFA World Cup 2018?", options: ["Morocco and Peru", "Panama and Iceland", "Serbia and Poland"], correctAnswer: "Panama and Iceland")
-let question14 = Question(question: "What is the host team of FIFA World Cup 2018?", options: ["Spain", "Russia", "Portugal"], correctAnswer: "Russia")
-let question15 = Question(question: "Which two teams will play the opening match in 2018 FIFA World Cup?", options: ["Poland and Russia", "Russia and Saudi Arabia", "Russia and Egypt"], correctAnswer: "Russia and Saudi Arabia")
-let question16 = Question(question: "In which city the Luzhniki Stadium is located?", options: ["Leningrad", "Saint Petersberg", "Moscow"], correctAnswer: "Moscow")
+let question12 = Question(question: "Which of the following countries did not take part in World Cup 2006?", options: ["Ghana", "Ireland", "Australia"], correctAnswer: "Ireland")
+let question13 = Question(question: "When did Football World Cup 2018 begin?", options: ["8 February 2018", "14 June 2018", "15 March 2018"], correctAnswer: "14 June 2018")
+let question14 = Question(question: "Who shot the first goal in Football World Cup 2018?", options: ["Yury Gazinsky", "Aleksandr Golovin", "Artem Dzyuba"], correctAnswer: "Yury Gazinsky")
+let question15 = Question(question: "What was the result of Russia versus Saudi Arabia match in Football World Cup 2018?", options: ["Saudi Arabia won 2-1", "2-2 Draw", "Russia won 5-0"], correctAnswer: "Russia won 5-0")
+let question16 = Question(question: "Who scored three goals for Portugal against Spain in Football World Cup 2018?", options: ["Cristiano Ronaldo", "Ricardo Quaresma", "Bernardo Silva"], correctAnswer: "Cristiano Ronaldo")
 
 // An array for all Question objects.
-let allQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11,question12, question13, question14, question15, question16]
+let worldCupQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11,question12, question13, question14, question15, question16]
 

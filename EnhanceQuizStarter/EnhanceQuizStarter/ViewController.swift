@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var secondsOnTimer = 15
     let soundManager = SoundManager()
     var gameTimer: Timer!
-    let quizManager = QuizManager(quiz: allQuestions)
+    let quizManager = QuizManager(quiz: worldCupQuestions)
     let nextQuestionButtonTitle = "Next Question"
     let playAgainButtonTitle = "Play Again"
     var optionsArray = [String]()
