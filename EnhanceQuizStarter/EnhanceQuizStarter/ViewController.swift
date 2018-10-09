@@ -82,23 +82,7 @@ class ViewController: UIViewController {
     func displayQuestion() {
         returnCheckMarkBackToPosition()
         loadButtonColor()
-        
-        //Check mark
-        checkMark.isHidden = true
-        
-        //Timer label
-        timer.text = String(secondsOnTimer)
-        timer.isHidden = false
-        gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
-        
-        //playAgainButton
-        playAgainButton.isHidden = true
-        
-        //showCorrectAnswer
-        showResultField.isHidden = true
-        for button in quizManager.buttons {
-            button.isEnabled = true
-        }
+        display(resultFieldIsHidden: true, timerIsHidden: false, checkMarkIsHidden: true, nextQuestionButtonIsHidden: true, optionButtonsEnabled: true)
         
         // Use this function change the playAgainButtonTitle before it shows up.
         changePlayAgainButtonTitle()
@@ -107,7 +91,7 @@ class ViewController: UIViewController {
     // Function that display scores after finishing one round of 4 questions.
     func displayScore() {
         gameTimer.invalidate()
-        timer.isHidden = true
+        display(timerIsHidden: true)
         questionField.text = "Way to go!\nYou got \(quizManager.correctQuestions) out of \(quizManager.questionsPerRound) correct!"
     }
     
@@ -126,19 +110,13 @@ class ViewController: UIViewController {
     // After the sender is pressed by user, the user will see the one he/she chose, the correct answer, and a text on top of options.
     @IBAction func chooseAnAnswer(_ sender: UIButton) {
         sender.setTitleColor(UIColor.white, for: UIControlState.disabled)
-        secondsOnTimer = initialTimePerQuestion
+        display(checkMarkIsHidden: false, nextQuestionButtonIsHidden: false, optionButtonsEnabled: false)
         changeCheckMarkPosition()
-        checkMark.isHidden = false
         quizManager.checkAnswer(sender: sender, showResultField: showResultField)
         if quizManager.questionsAsked == quizManager.questionsPerRound {
             displayScore()
         }
         gameTimer.invalidate()
-        playAgainButton.isHidden = false
-        for button in quizManager.buttons {
-            button.isEnabled = false
-            
-        }
     }
     
     // The playAgainButton shows up every time after action 'chooseAnAnswer'.

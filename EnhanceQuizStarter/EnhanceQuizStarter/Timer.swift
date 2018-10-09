@@ -17,20 +17,17 @@ extension ViewController {
         secondsOnTimer -= 1
         timer.text = String(secondsOnTimer)
         if secondsOnTimer <= 0 {
-            checkMark.isHidden = false
-            for button in quizManager.buttons {
-                button.isEnabled = false
-            }
+            display(resultFieldIsHidden: false, checkMarkIsHidden: false, nextQuestionButtonIsHidden: false, optionButtonsEnabled: false)
             soundManager.playWrongAnswerSound()
             gameTimer.invalidate()
             quizManager.questionsAsked += 1
             quizManager.indexOfCurrentQuestion += 1
-            playAgainButton.isHidden = false
             if quizManager.questionsAsked == quizManager.questionsPerRound {
                 displayScore()
             }
-            showResultField.isHidden = false
+            let wrongAnswerColor = UIColor(red: 255/255, green: 41/255, blue: 90/255, alpha: 1.0)
             showResultField.text = "Time Out!"
+            showResultField.tintColor = wrongAnswerColor
         } else {
             timer.text = String(secondsOnTimer)
         }
